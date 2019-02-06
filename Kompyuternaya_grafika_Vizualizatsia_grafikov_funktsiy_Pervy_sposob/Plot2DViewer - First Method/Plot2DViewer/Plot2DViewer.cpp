@@ -49,8 +49,9 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 // Все дальнейшие действия осуществляются посредством обращения к методам, реализованным в этом классе
 double v[15] = { 1,1,5,5,3,4,1,1,4,5.5,1,1,1,1,1 };
 Matrix<> V(3, 5, v);
-Scene2D scene(L,R,B,T, V);
-Model2D model;
+int e[12] = { 1,2,3,4,1,4,2,3,4,1,5,5 };
+Matrix<int> E(2, 6, e);
+Scene2D scene(L, R, B, T, V, E);
 
 LRESULT _stdcall WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)		// оконная процедура принимает и обрабатывает все сообщения, отправленные окну
 {
@@ -62,8 +63,6 @@ LRESULT _stdcall WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)		// 
 			scene.Clear(dc);				// Вызов реализованного в классе Camera2D метода, отвечающего за очистку рабочей области окна hWnd
 			scene.Plot(dc, Parabola);		// Вызов реализованного в классе Scene2D метода, отвечающего за отрисовку графика синусоиды
 			scene.Render(dc);
-			scene.model.Apply(Rotation(5));
-			scene.Render(dc);
 			ReleaseDC(hWnd,dc);
 			return DefWindowProc(hWnd,msg,wParam,lParam);
 		}
@@ -74,6 +73,27 @@ LRESULT _stdcall WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)		// 
 			scene.SetResolution(hWnd);
 			ReleaseDC(hWnd,dc);
 			InvalidateRect(hWnd,nullptr,false);
+			return 0;
+		}
+
+	case WM_KEYDOWN:
+		{
+			switch (wParam)
+			{
+				case VK_LEFT:
+				{
+					scene.model.Apply(Rotation(1));
+					InvalidateRect(hWnd, nullptr, false);
+					break;
+				}
+				case VK_RIGHT:
+				{
+					scene.model.Apply(Rotation(-1));
+					InvalidateRect(hWnd, nullptr, false);
+					break;
+				}
+			}
+			InvalidateRect(hWnd, nullptr, false);
 			return 0;
 		}
 

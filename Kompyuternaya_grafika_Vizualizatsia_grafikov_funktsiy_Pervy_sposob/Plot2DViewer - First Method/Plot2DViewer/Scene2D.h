@@ -10,18 +10,20 @@ class Scene2D : public Camera2D
 private:
 	typedef double (*Func)(double);
 public:
-	Scene2D(double L, double R, double B, double T, Matrix<> V) : Camera2D(L, R, B, T)
+	Scene2D(double L, double R, double B, double T, Matrix<> V, Matrix<int> E) : Camera2D(L, R, B, T)
 	{
 		model.SetVertices(V);
+		model.SetEdges(E);
 	}
 
 	Model2D model;
 
 	void Render(HDC dc) {
-		MoveTo(Tx(model.GetVerticesX(1), 6), Ty(model.GetVerticesY(1), 6));
-		for (int i = 2; i <= 5; i++)
-		DrawLineTo(dc, Tx(model.GetVerticesX(i), 6), Ty(model.GetVerticesY(i), 6));
-		DrawLineTo(dc, Tx(model.GetVerticesX(1), 6), Ty(model.GetVerticesY(1), 6));
+		Matrix<int> E = model.GetEdges();
+		for (int i = 1; i <= model.GetColsEdges(); i++) {
+			MoveTo(Tx(model.GetVerticesX(E(1, i)), 6), Ty(model.GetVerticesY(E(1, i)), 6));
+			DrawLineTo(dc, Tx(model.GetVerticesX(E(2, i)), 6), Ty(model.GetVerticesY(E(2, i)), 6));
+		}
 	}
 
 	void Plot(HDC dc, Func f, bool axes = true)

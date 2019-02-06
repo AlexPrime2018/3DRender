@@ -25,6 +25,9 @@ public:
 	double GetVerticesY(int n) { if (n <= Vertices.GetCols()) return Vertices(2, n); }
 
 	void SetVertices(Matrix<> V) { Vertices = V; }
+	void SetEdges(Matrix<int> E) { Edges = E; }
+
+	int GetColsEdges() { return Edges.GetCols(); }
 
 	Matrix<> GetVertices() { return Vertices; }
 	Matrix<int> GetEdges() { return Edges; }
