@@ -1,7 +1,11 @@
 #include <windows.h>
 #include <windowsx.h>
+
 #include "Data.h"
 #include "Scene2D.h"
+#include "Matrix.h"
+#include "AffineTransform.h"
+#include "Model2D.h"
 
 LRESULT _stdcall WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);						// прототип оконной процедуры
 int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)		// основная процедура
@@ -43,7 +47,10 @@ int _stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 // В основном модуле объявляется только одна глобальная переменная - создаётся объект класса Scene2D
 // Все дальнейшие действия осуществляются посредством обращения к методам, реализованным в этом классе
-Scene2D scene(L,R,B,T);
+double v[15] = { 1,1,5,5,3,4,1,1,4,5.5,1,1,1,1,1 };
+Matrix<> V(3, 5, v);
+Scene2D scene(L,R,B,T, V);
+Model2D model;
 
 LRESULT _stdcall WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)		// оконная процедура принимает и обрабатывает все сообщения, отправленные окну
 {
@@ -54,6 +61,9 @@ LRESULT _stdcall WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)		// 
 			HDC dc = GetDC(hWnd);
 			scene.Clear(dc);				// Вызов реализованного в классе Camera2D метода, отвечающего за очистку рабочей области окна hWnd
 			scene.Plot(dc, Parabola);		// Вызов реализованного в классе Scene2D метода, отвечающего за отрисовку графика синусоиды
+			scene.Render(dc);
+			scene.model.Apply(Rotation(5));
+			scene.Render(dc);
 			ReleaseDC(hWnd,dc);
 			return DefWindowProc(hWnd,msg,wParam,lParam);
 		}

@@ -5,5 +5,7 @@ d:\repos\kompyuternaya_grafika_vizualizatsia_grafikov_funktsiy_pervy_sposob\plot
 d:\repos\kompyuternaya_grafika_vizualizatsia_grafikov_funktsiy_pervy_sposob\plot2dviewer - first method\plot2dviewer\camera2d.h(48): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
 d:\repos\kompyuternaya_grafika_vizualizatsia_grafikov_funktsiy_pervy_sposob\plot2dviewer - first method\plot2dviewer\camera2d.h(59): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 d:\repos\kompyuternaya_grafika_vizualizatsia_grafikov_funktsiy_pervy_sposob\plot2dviewer - first method\plot2dviewer\camera2d.h(60): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\repos\kompyuternaya_grafika_vizualizatsia_grafikov_funktsiy_pervy_sposob\plot2dviewer - first method\plot2dviewer\model2d.h(25): warning C4715: 'Model2D::GetVerticesY': not all control paths return a value
+d:\repos\kompyuternaya_grafika_vizualizatsia_grafikov_funktsiy_pervy_sposob\plot2dviewer - first method\plot2dviewer\model2d.h(24): warning C4715: 'Model2D::GetVerticesX': not all control paths return a value
   Plot2DViewer.vcxproj -> D:\Repos\Kompyuternaya_grafika_Vizualizatsia_grafikov_funktsiy_Pervy_sposob\Plot2DViewer - First Method\Debug\Plot2DViewer.exe
   Plot2DViewer.vcxproj -> D:\Repos\Kompyuternaya_grafika_Vizualizatsia_grafikov_funktsiy_Pervy_sposob\Plot2DViewer - First Method\Debug\Plot2DViewer.pdb (Full PDB)
